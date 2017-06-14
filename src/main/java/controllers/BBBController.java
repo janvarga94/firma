@@ -36,7 +36,7 @@ public class BBBController {
 	@RequestMapping(value = "/api/hi", 
 			method = RequestMethod.GET)
 	public ResponseEntity getAllBankAccounts() {
-		System.out.println("here");
+
 		AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(SoapClientConfig.class);
 	    BankOrderClient wsclient = /*new BankOrderClient();*/ context.getBean(BankOrderClient.class);
 	    wsclient.setDefaultUri("http://localhost:10011/ws");
@@ -50,26 +50,30 @@ public class BBBController {
 	    	XMLGregorianCalendar now = DatatypeFactory.newInstance().newXMLGregorianCalendar(new GregorianCalendar());
 			request.setBankOrderDate(now);
 			request.setCurrensyDate(now);
+			request.setOrderDate(now);
 	    } catch (DatatypeConfigurationException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
 	    
-	//    request.setDebtor(IAmDebtor);
+	    request.setDebtor(MyAccount);
 	    request.setDirection("A");
 	    request.setFirstAccount(SendingMoneyToWho);
 	    request.setFirstModel("as");
 	    request.setFirstNumber("+12312321");
+	    request.setPurposeOfPayment("just because");
+	    request.setRecipient("to who");
+	    request.setSecondAccount("2nd acc");
+	    request.setSecondModel("12");
+	    request.setSecondNumber("4322434");
+	    request.setUrgently(false);
 	//    request
 	    
 	    
 
-	    try{
+	   
 	    	ImportNalogZaPlacanjeResponse resp = wsclient.getBeer(request);
-	    	
-	    }catch(org.springframework.ws.soap.security.wss4j2.Wss4jSecuritySecurementException e){
-	    	System.out.println("Sdf");
-	    }
+	    	System.out.println(resp.getCreatedBankOrderId());
 	    
 	    
 		return new ResponseEntity<String>(HttpStatus.OK);

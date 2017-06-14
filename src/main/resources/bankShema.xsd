@@ -88,7 +88,7 @@
     <xs:element name="importNalogZaPlacanjeResponse">
         <xs:complexType>
             <xs:sequence>
-            	<xs:element type="xs:int" name="CreatedBankOrderId"/>                            
+            	<xs:element type="xs:string" name="CreatedBankOrderId"/>                            
             </xs:sequence>
         </xs:complexType>
     </xs:element>

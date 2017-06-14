@@ -32,7 +32,7 @@ public class SoapClientConfig {
         Wss4jSecurityInterceptor securityInterceptor = new Wss4jSecurityInterceptor();
 
         // set security actions
-        securityInterceptor.setSecurementActions("Timestamp Signature Encrypt");
+        securityInterceptor.setSecurementActions("Timestamp Signature");
 
         // sign the request
         securityInterceptor.setSecurementUsername("client");
@@ -45,6 +45,11 @@ public class SoapClientConfig {
         securityInterceptor.setSecurementEncryptionParts("{Content}{http://spring.io/guides/gs-producing-web-service}importNalogZaPlacanjeRequest");
         securityInterceptor.setSecurementSignatureKeyIdentifier("DirectReference");
 
+        
+     //   securityInterceptor.setValidationActions("NoSecurity");
+        securityInterceptor.setValidateResponse(false);
+      //  securityInterceptor.setValidateRequest(false);
+        
         return securityInterceptor;
     }
 
@@ -68,7 +73,7 @@ public class SoapClientConfig {
         BankOrderClient beerClient = new BankOrderClient();
         beerClient.setMarshaller(getMarshaller());
         beerClient.setUnmarshaller(getMarshaller());
-        beerClient.setDefaultUri("http://localhost:10011/ws");
+        beerClient.setDefaultUri("https://localhost:10011/ws");
         ClientInterceptor[] interceptors = new ClientInterceptor[]{securityInterceptor()};
         beerClient.setInterceptors(interceptors);
         return beerClient;

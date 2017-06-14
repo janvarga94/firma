@@ -12,8 +12,10 @@ public class BankOrderClient  extends WebServiceGatewaySupport{
 	public BankOrderClient(){}
 	
 	public ImportNalogZaPlacanjeResponse getBeer(ImportNalogZaPlacanjeRequest request){
-	        return (ImportNalogZaPlacanjeResponse) getWebServiceTemplate()
+	        Object response = getWebServiceTemplate()
 	                .marshalSendAndReceive(request);
+	        
+	        return (ImportNalogZaPlacanjeResponse) response;
 
 	    }
 }
