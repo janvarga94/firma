@@ -46,9 +46,15 @@ public class SoapClientConfig {
         securityInterceptor.setSecurementSignatureKeyIdentifier("DirectReference");
 
         
-     //   securityInterceptor.setValidationActions("NoSecurity");
-        securityInterceptor.setValidateResponse(false);
-      //  securityInterceptor.setValidateRequest(false);
+        //try------ IT WORKS, now response doesnt throw null pointer
+        securityInterceptor.setValidationActions("Signature Encrypt");      
+        securityInterceptor.setValidationSignatureCrypto(getCryptoFactoryBean().getObject());
+        securityInterceptor.setValidationDecryptionCrypto(getCryptoFactoryBean().getObject());
+        securityInterceptor.setValidationCallbackHandler(securityCallbackHandler());
+       
+        //end try-----
+        
+        
         
         return securityInterceptor;
     }
